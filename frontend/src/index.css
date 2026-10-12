@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+/*
+  StockSense theme.
+  The palette comes from the shop floor: indigo ink from price-gun labels,
+  shelf-tag yellow, and three stock signals (ok / low / out).
+  Every colour used in the app is defined here, so Tailwind classes such as
+  bg-ink, text-ink-soft, bg-tag or text-low all come from this one place.
+*/
+/* REQUIREMENT [Core Req 4 - Frontend Design]: "a deliberate color palette defined in your Tailwind theme". Tailwind v4 @theme defines the custom fonts, colors and shadow once. */
+/* Utility classes such as bg-ink, text-ink-soft, bg-tag and text-low all come from here. */
+@theme {
+  --font-display: "Bricolage Grotesque", "Figtree", system-ui, sans-serif;
+  --font-sans: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-canvas: #f3f4f8;
+  --color-surface: #ffffff;
+  --color-ink: #17193a;
+  --color-ink-soft: #565a7c;
+  --color-ink-faint: #8a8ea9;
+  --color-line: #e1e3ee;
+
+  --color-tag: #ffcb3d;
+  --color-tag-soft: #fff4cf;
+  --color-tag-deep: #7a5600;
+
+  --color-accent: #4b45e0;
+  --color-accent-soft: #eae9fd;
+
+  --color-ok: #137a4b;
+  --color-ok-soft: #dcf3e6;
+  --color-low: #b4530a;
+  --color-low-soft: #fdebd3;
+  --color-out: #c2223b;
+  --color-out-soft: #fbe0e4;
+
+  --shadow-pop: 0 18px 40px -12px rgb(23 25 58 / 0.28);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+    min-width: 320px;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+    letter-spacing: -0.015em;
+  }
+  /* One visible keyboard focus style for every interactive element */
+  /* REQUIREMENT [Core Req 4 - Frontend Design]: readable and accessible - one visible keyboard focus style for every interactive element. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  button:not(:disabled),
+  [role="button"],
+  select,
+  summary {
+    cursor: pointer;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@keyframes shimmer {
+  50% {
+    opacity: 0.45;
+  }
+}
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.animate-toast {
+  animation: toast-in 180ms ease-out;
+}
+.animate-shimmer {
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+/* The landing page shelf fills up once, on load */
+.animate-grow {
+  transform-origin: left;
+  animation: grow 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-toast,
+  .animate-shimmer,
+  .animate-grow {
+    animation: none;
+  }
+}
