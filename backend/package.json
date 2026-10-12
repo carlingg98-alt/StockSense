@@ -1,0 +1,19 @@
+{
+  "name": "stocksense-server",
+  "version": "1.0.0",
+  "description": "StockSense REST API - inventory and demand forecasting for small retailers",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "seed": "node seed/seed.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.6",
+    "express": "^5.2.1",
+    "mongodb-memory-server": "^11.3.0",
+    "mongoose": "^9.11.0"
+  }
+}
